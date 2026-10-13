@@ -28,8 +28,8 @@ build
 dist
 
 # Generated (pnpm gen:registry / pnpm build:interactions로 재생성)
-apps/gallery/app/registry.ts
-apps/gallery/public/interactions/
+apps/web/app/registry.ts
+apps/web/public/interactions/
 
 
 # Debug
@@ -40,3 +40,5 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+apps/web/lib/works.generated.tsx

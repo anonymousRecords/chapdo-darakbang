@@ -4,8 +4,8 @@ import { execSync } from "child_process";
 
 const ROOT = path.resolve(__dirname, "../..");
 const APPS_DIR = path.join(ROOT, "apps");
-const GALLERY_DIR = path.join(APPS_DIR, "gallery");
-const OUTPUT_DIR = path.join(GALLERY_DIR, "public/interactions");
+const WEB_DIR = path.join(APPS_DIR, "web");
+const OUTPUT_DIR = path.join(WEB_DIR, "public/interactions");
 
 function isViteApp(appDir: string): boolean {
   const hasIndexHtml = fs.existsSync(path.join(appDir, "index.html"));
@@ -21,7 +21,7 @@ function discoverViteApps(): string[] {
     const appDir = path.join(APPS_DIR, dir);
 
     if (!fs.statSync(appDir).isDirectory()) continue;
-    if (dir === "gallery") continue;
+    if (dir === "web") continue;
     if (!isViteApp(appDir)) continue;
 
     apps.push(dir);

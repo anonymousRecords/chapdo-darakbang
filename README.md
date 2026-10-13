@@ -108,3 +108,12 @@ _[관련 아티클](https://chapdo.vercel.app/posts/3D%EC%B2%98%EB%9F%BC-%EB%B3%
   https://youtu.be/zGKNMm4L-r4?si=rZIgcM9M7bAmAiXv
 
 </details>
+
+
+---
+
+## 작품 일지 작성
+
+메인에서 날짜를 클릭하면 작품과 제작 이유를 함께 볼 수 있습니다. 새 글은 `apps/web/works/<slug>/post.mdx`에 작성합니다. 로컬 실행·게시·배포 방법은 [갤러리 작성 안내](apps/web/README.md)를 참고하세요.
+
+새 React 작품은 `pnpm new:work <slug> --title "작품 제목"`으로 생성하고 `pnpm dev:web`으로 미리 봅니다. 기존 작품을 함께 실행하려면 `pnpm dev`를 사용합니다.

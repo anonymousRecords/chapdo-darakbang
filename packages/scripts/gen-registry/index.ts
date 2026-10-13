@@ -9,8 +9,8 @@ interface AppEntry {
 
 const ROOT = path.resolve(__dirname, "../../..");
 const APPS_DIR = path.join(ROOT, "apps");
-const GALLERY_DIR = path.join(APPS_DIR, "gallery");
-const OUTPUT_FILE = path.join(GALLERY_DIR, "app/registry.ts");
+const WEB_DIR = path.join(APPS_DIR, "web");
+const OUTPUT_FILE = path.join(WEB_DIR, "app/registry.ts");
 
 function isViteApp(appDir: string): boolean {
   const hasIndexHtml = fs.existsSync(path.join(appDir, "index.html"));
@@ -75,7 +75,7 @@ function discoverApps(errors: string[]): AppEntry[] {
     const appDir = path.join(APPS_DIR, dir);
 
     if (!fs.statSync(appDir).isDirectory()) continue;
-    if (dir === "gallery") continue;
+    if (dir === "web") continue;
     if (!isViteApp(appDir)) continue;
 
     const entry = readMeta(dir, appDir, errors);

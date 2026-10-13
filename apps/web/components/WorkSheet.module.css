@@ -1,0 +1,65 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgb(0 0 0 / 30%);
+}
+
+.sheet {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 21;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 20px 20px 0 0;
+  outline: none;
+  padding: 0 max(24px, calc((100vw - 964px) / 2)) 35dvh;
+}
+
+.handle {
+  flex-shrink: 0;
+  margin: 18px auto 22px;
+  background: var(--muted);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.header time {
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1;
+  min-height: 0;
+  padding: 0 2px calc(28px + env(safe-area-inset-bottom));
+}
+
+.sheet[data-expanded="true"] {
+  padding-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet, .overlay {
+    animation: none !important;
+    transition: none !important;
+  }
+}

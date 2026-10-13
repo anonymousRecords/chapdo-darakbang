@@ -17,6 +17,8 @@ apps/web/
 
 ## 새 작품 작성
 
+Node.js 24.x와 pnpm 12.11.2를 사용합니다. `.node-version`에는 로컬 검증 버전 24.21.0을 기록하고, 루트 `package.json`의 `packageManager`로 pnpm 버전을 고정합니다.
+
 저장소 루트에서 실행합니다.
 
 ```sh
@@ -93,3 +95,9 @@ GIF가 없는 작품은 기존 실시간 미리보기를 사용합니다. 개발
 전체 19개 작품을 등록했습니다. 날짜는 한국 시간 기준 첫 구현 커밋의 작성일이며 실제 제작일이나 게시일을 의미하지 않습니다. `works/commit-dates.json`에 원본 커밋 SHA·작성 시각·메시지를 기록했습니다. 폴더 이동 및 복사된 기본 템플릿 커밋은 제외했습니다. 신호등·상자는 README의 월 표기 대신 확인 가능한 첫 구현 커밋 날짜로 변경했습니다.
 
 기존 제작 이유 네 편은 그대로 유지하고, 나머지 작품의 본문은 비워 두었습니다. 본문이 없으면 제작 이유 영역을 표시하지 않습니다. 19개 작품 모두 GIF 미리보기와 원본 작품 링크를 사용합니다.
+
+## Vercel 빌드 설정
+
+저장소 루트에서 빌드합니다. Root Directory는 비워 두고 Framework Preset은 `Other`, Node.js는 `24.x`, Output Directory는 `apps/web/out`으로 설정합니다. Install Command는 `npx --yes pnpm@12.11.2 install --frozen-lockfile`, Build Command는 `npx --yes pnpm@12.11.2 build`입니다.
+
+pnpm 12의 기본 의존성 검증을 유지합니다. `pnpm-workspace.yaml`의 `allowBuilds`에는 설치 단계에서 필요한 `@swc/core`, `esbuild`, `sharp`만 지정합니다.

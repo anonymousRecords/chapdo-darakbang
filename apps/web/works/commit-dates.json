@@ -1,0 +1,138 @@
+{
+  "basis": "First implementation commit author date in Asia/Seoul; not creation or publication date. Renames, copied scaffolds and later configuration commits excluded.",
+  "works": [
+    {
+      "slug": "button-press",
+      "date": "2025-10-31",
+      "commit": "db72a7636b9bcacb7d743cbdbd09f43e35df7d06",
+      "authorDate": "2025-10-31T14:15:24+09:00",
+      "subject": "Implement Button Press (#7)"
+    },
+    {
+      "slug": "curtain-reveal-menu",
+      "date": "2025-12-02",
+      "commit": "eb3d20aa2eb9c8a518953f51a76518e6f271e149",
+      "authorDate": "2025-12-02T19:58:56+09:00",
+      "subject": "feat: Implement curtain reveal menu"
+    },
+    {
+      "slug": "fancy-gradient-hover-link",
+      "date": "2025-11-18",
+      "commit": "638e63c3fff9ac0554254b76e54c7ffae7970fc2",
+      "authorDate": "2025-11-18T14:51:19+09:00",
+      "subject": "feat: Implement fancy gradient hover effect"
+    },
+    {
+      "slug": "fancy-nav",
+      "date": "2025-11-20",
+      "commit": "8b51fb4dfdfbfdc8fe280e5e170b2deb943880da",
+      "authorDate": "2025-11-20T13:35:55+09:00",
+      "subject": "feat: Implement fancy nav"
+    },
+    {
+      "slug": "full-screen-carousel",
+      "date": "2025-11-25",
+      "commit": "d1d2928b8748446957eb0f56d26fadda729b40f4",
+      "authorDate": "2025-11-25T11:24:48+09:00",
+      "subject": "feat: Implement full screen carousel"
+    },
+    {
+      "slug": "hover-card-effect",
+      "date": "2025-11-22",
+      "commit": "317b20fce01fe52225d8b7e833e8244ddcb4fb26",
+      "authorDate": "2025-11-22T16:54:05+09:00",
+      "subject": "feat: Implement card hover effect"
+    },
+    {
+      "slug": "hover-effect",
+      "date": "2025-11-15",
+      "commit": "c3b41a252648fdf5663ef2a7bbe79c1beca98e4d",
+      "authorDate": "2025-11-15T21:48:01+09:00",
+      "subject": "feat: Initialize hover-effect app with HTML, CSS, JS, and configuration files"
+    },
+    {
+      "slug": "hover-glide-image-gallery",
+      "date": "2025-11-24",
+      "commit": "c01a336c021a45cba26ec38e8f0fc372abed8461",
+      "authorDate": "2025-11-24T18:26:49+09:00",
+      "subject": "feat: Implement hover glide image gallery"
+    },
+    {
+      "slug": "intelligent-mouse-trailer",
+      "date": "2025-11-21",
+      "commit": "b877c5785b7b1b41269e522362dbdb18eef8ec83",
+      "authorDate": "2025-11-21T13:28:53+09:00",
+      "subject": "feat: Implement intelligent mouse trailer"
+    },
+    {
+      "slug": "living-shapes",
+      "date": "2025-12-01",
+      "commit": "2605a815480e7e62780c52f69053ae43ac523d94",
+      "authorDate": "2025-12-01T20:11:40+09:00",
+      "subject": "feat: Implement living shapes"
+    },
+    {
+      "slug": "mouse-move-image-gallery",
+      "date": "2025-11-26",
+      "commit": "9e48cf8ea1078df68546f3d9b96cfa4926ff8522",
+      "authorDate": "2025-11-26T15:06:39+09:00",
+      "subject": "feat: Implement mouse image gallery"
+    },
+    {
+      "slug": "opening-box",
+      "date": "2026-01-27",
+      "commit": "08a337b348827f81724042bd6dc6cb0bf3ad482e",
+      "authorDate": "2026-01-27T14:35:14+09:00",
+      "subject": "feat: opening box 인터랙션 구현"
+    },
+    {
+      "slug": "sparckling-text",
+      "date": "2025-11-14",
+      "commit": "1717dc570236bb9d1603ba28d79a8818bb0f541f",
+      "authorDate": "2025-11-14T20:07:10+09:00",
+      "subject": "feat: Implement Sparckling text animation"
+    },
+    {
+      "slug": "staggered-grid-effect",
+      "date": "2025-11-20",
+      "commit": "03e89215b9c52b8c771675c56ff206626339832f",
+      "authorDate": "2025-11-20T13:06:22+09:00",
+      "subject": "feat: Implement staggered grid effect"
+    },
+    {
+      "slug": "stranger-things",
+      "date": "2026-01-30",
+      "commit": "03d7374de6125e79dd43ddba6b762b4795ffd96a",
+      "authorDate": "2026-01-30T23:41:33+09:00",
+      "subject": "feat: stranger things tilted 카드 구현"
+    },
+    {
+      "slug": "tactile-fader",
+      "date": "2026-01-23",
+      "commit": "39441dbb37c9702d7ac23f8dd310e0b5e793cd28",
+      "authorDate": "2026-01-23T23:41:14+09:00",
+      "subject": "feat: TactileFader 구현"
+    },
+    {
+      "slug": "tooltip-delays",
+      "date": "2025-10-31",
+      "commit": "fb97ea99d7488724922d6757d2d886ccb54a7c69",
+      "authorDate": "2025-10-31T13:31:04+09:00",
+      "subject": "Implement Tooltip Delay  (#3)"
+    },
+    {
+      "slug": "traffic-light",
+      "date": "2026-01-27",
+      "commit": "48eb4b8fb256c0b193b65d0f59fba395cde4acb7",
+      "authorDate": "2026-01-27T14:24:27+09:00",
+      "subject": "feat: 신호등 인터랙션 구현 및 패키지별 tsconfig 경로 수정"
+    },
+    {
+      "slug": "website-header",
+      "date": "2025-11-17",
+      "commit": "f5ab64dc893569bb90dbecc0f7fb9d42aad9c2d2",
+      "authorDate": "2025-11-17T14:09:55+09:00",
+      "subject": "feat: Implement website header interaction"
+    }
+  ]
+}

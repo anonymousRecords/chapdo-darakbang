@@ -4,7 +4,7 @@
   "tasks": {
     "//#gen:registry": {
       "inputs": ["apps/*/meta.json", "packages/scripts/gen-registry/**"],
-      "outputs": ["apps/gallery/app/registry.ts"]
+      "outputs": ["apps/web/app/registry.ts"]
     },
     "build": {
       "dependsOn": ["^build", "//#gen:registry"],
@@ -21,6 +21,12 @@
       "dependsOn": ["//#gen:registry"],
       "cache": false,
       "persistent": true
+    },
+    "web#build": {
+      "dependsOn": ["^build", "//#gen:registry"],
+      "cache": false,
+      "outputs": [".next/**", "!.next/cache/**", "out/**"]
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV"]
 }

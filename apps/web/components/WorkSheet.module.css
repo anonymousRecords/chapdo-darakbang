@@ -7,25 +7,59 @@
 
 .sheet {
   position: fixed;
-  inset: auto 0 0;
+  inset: auto 16px 16px;
   z-index: 21;
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: var(--paper);
+  background-color: #fffef9;
+  background-image:
+    linear-gradient(to right, transparent 95px, rgb(205 92 82 / 42%) 95px 96px, transparent 96px 97px),
+    repeating-linear-gradient(to bottom, transparent 0, transparent 24px, rgb(113 153 178 / 29%) 24px, rgb(113 153 178 / 29%) 25px),
+    radial-gradient(ellipse at 18% 12%, rgb(229 216 184 / 13%), transparent 44%),
+    linear-gradient(180deg, #fffef9 0%, #fcfaf2 100%);
   color: var(--ink);
-  border-radius: 20px 20px 0 0;
+  border: 1px solid rgb(112 95 64 / 14%);
+  border-radius: 0;
+  box-shadow: 0 -12px 38px rgb(34 28 17 / 18%), inset 0 1px 0 rgb(255 255 255 / 90%);
   outline: none;
   padding: 0 max(24px, calc((100vw - 964px) / 2)) 35dvh;
+  padding-left: max(128px, calc((100vw - 964px) / 2));
+  -webkit-mask-image: linear-gradient(#000, #000), radial-gradient(circle, #000 0 8px, transparent 9px);
+  -webkit-mask-size: 100% 100%, 24px 14.2857%;
+  -webkit-mask-position: 0 0, 6px 0;
+  -webkit-mask-repeat: no-repeat, repeat-y;
+  -webkit-mask-composite: xor;
+  mask-image: linear-gradient(#000, #000), radial-gradient(circle, #000 0 8px, transparent 9px);
+  mask-size: 100% 100%, 24px 14.2857%;
+  mask-position: 0 0, 6px 0;
+  mask-repeat: no-repeat, repeat-y;
+  mask-composite: exclude;
+  filter: drop-shadow(0 0 1px rgb(87 77 60 / 70%));
+}
+
+@media (min-width: 720px) {
+  .sheet {
+    inset-inline: 32px;
+    bottom: 24px;
+  }
 }
 
 .handle {
   flex-shrink: 0;
-  margin: 18px auto 22px;
-  background: var(--muted);
+  margin: 17px auto 22px;
+  background: transparent;
+  opacity: 0;
+}
+
+.sheet .handle {
+  background: transparent;
+  opacity: 0;
 }
 
 .header {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-start;
   margin-bottom: 24px;
@@ -46,6 +80,8 @@
 }
 
 .body {
+  position: relative;
+  z-index: 1;
   overflow-y: auto;
   overscroll-behavior: contain;
   flex: 1;

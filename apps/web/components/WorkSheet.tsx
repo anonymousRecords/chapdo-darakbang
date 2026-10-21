@@ -37,7 +37,6 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
       activeSnapPoint={snap}
       setActiveSnapPoint={setSnap}
       fadeFromIndex={0}
-      handleOnly
       autoFocus
     >
       <Drawer.Trigger asChild>

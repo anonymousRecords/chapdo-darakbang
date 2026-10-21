@@ -1,0 +1,72 @@
+/* .pole {
+  width: 28px;
+  height: 500px;
+  background: linear-gradient(
+    to right,
+    #1a1a1a 0%,
+    #333 20%,
+    #555 50%,
+    #333 80%,
+    #111 100%
+  );
+  border-radius: 4px;
+  position: relative;
+  box-shadow: inset 2px 0 6px rgba(0, 0, 0, 0.6),
+    inset -2px 0 6px rgba(255, 255, 255, 0.1), 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.pole::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 8px;
+  height: 100%;
+  border-radius: 2px;
+} */
+
+.pole {
+  width: 28px;
+  height: 600px;
+  background: linear-gradient(
+    to left,
+    #c8c4be 1%,
+    #CDC9C5 3%,
+    #AAB1B2 50%,
+    #909FB6 100%
+  );
+  border-radius: 4px;
+  position: relative;
+  box-shadow: inset 8px 0 8px rgba(0, 0, 0, 0.1),
+    inset -8px 0 8px rgba(255, 255, 255, 0.1), 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.pole::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 8px;
+  height: 100%;
+  border-radius: 2px;
+}
+
+/* 신호등 박스 때문에 생기는 그림자 */
+.pole::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 40px;       /* 신호등 상단 위치에 맞춰서 조정 */
+  width: 100%;
+  height: 140px;   /* 신호등 높이만큼 */
+  background: radial-gradient(
+    circle at 100% 50%,               /* 오른쪽에서 들어오는 빛 */
+    rgba(0,0,0,0.35) 0,
+    rgba(0,0,0,0.28) 30%,
+    rgba(0,0,0,0.12) 65%,
+    rgba(0,0,0,0) 100%
+  );
+  filter: blur(6px);
+  opacity: 0.9;
+  mix-blend-mode: multiply; /* 폴 색이랑 자연스럽게 섞이게 */
+}

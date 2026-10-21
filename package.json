@@ -2,13 +2,19 @@
   "name": "ux-interaction-log",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
+    "build": "pnpm gen:registry && pnpm build:interactions && turbo run build --filter=web",
+    "build:interactions": "tsx packages/scripts/build-interactions.ts",
+    "dev": "turbo run dev --concurrency=30",
+    "dev:gallery": "pnpm dev:web",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "gen": "tsx packages/scripts/gen-log-bridges/index.ts",
-    "gallery": "turbo run --filter=gallery dev"
+    "gen:registry": "tsx packages/scripts/gen-registry/index.ts",
+    "gallery": "pnpm dev:web",
+    "dev:web": "pnpm --filter web dev",
+    "new:work": "pnpm --filter web new:work",
+    "gen:works": "pnpm --filter web gen:works",
+    "test": "pnpm --filter web test"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
@@ -19,9 +25,9 @@
     "typescript": "5.9.2",
     "vite": "^7.1.7"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@12.11.2",
   "engines": {
-    "node": ">=18"
+    "node": "24.x"
   },
   "dependencies": {
     "esbuild": "^0.25.11"

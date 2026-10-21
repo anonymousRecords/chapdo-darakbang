@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>sparckling-text</title>
+  </head>
+  <script type="module" src="/src/main.js"></script>
+  <body>
+    <script>
+      (function() {
+        try { if (window.self !== window.top) return; } catch (e) { return; }
+        var MOBILE_BREAKPOINT = 768;
+        var MESSAGE = "데스크탑 환경에서만 접속 가능해요.";
+        function showMobileBlock() {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;padding:20px;text-align:center;font-family:system-ui,sans-serif;box-sizing:border-box;"><p style="font-size:18px;color:#333;margin:0;">' + MESSAGE + '</p></div>';
+        }
+        if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock();
+        window.addEventListener('resize', function() { if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock(); });
+      })();
+    </script>
+    <h1>
+      It's autumn, and
+      <span class="autumn">
+        <span class="autumn-leaves">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+            <g stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+              <path d="M31 43s-13 1-20-7S4 4 4 4s24-1 32 5s6 23 6 23" />
+              <path
+                d="M44 44s-11.18-8.449-18-16c-6.82-7.552-10-15-10-15m10 15l1-13m-1 13l-10-1"
+              />
+            </g>
+          </svg>
+        </span>
+        <span class="autumn-leaves">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+            <g stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+              <path d="M31 43s-13 1-20-7S4 4 4 4s24-1 32 5s6 23 6 23" />
+              <path
+                d="M44 44s-11.18-8.449-18-16c-6.82-7.552-10-15-10-15m10 15l1-13m-1 13l-10-1"
+              />
+            </g>
+          </svg>
+        </span>
+        <span class="autumn-leaves">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+            <g stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+              <path d="M31 43s-13 1-20-7S4 4 4 4s24-1 32 5s6 23 6 23" />
+              <path
+                d="M44 44s-11.18-8.449-18-16c-6.82-7.552-10-15-10-15m10 15l1-13m-1 13l-10-1"
+              />
+            </g>
+          </svg>
+        </span>
+        <span class="autumn-text">the leaves are falling.</span>
+      </span>
+    </h1>
+  </body>
+</html>

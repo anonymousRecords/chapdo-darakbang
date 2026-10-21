@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.scene {
+  perspective: 1000px;
+  perspective-origin: center center;
+}
+
+.card {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(255, 0, 0, 0.3),
+    0 0 40px rgba(0, 0, 255, 0.2);
+}
+
+.card__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+
+.card__layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.card__layer--back {
+  z-index: 1;
+}
+
+.card__layer--front {
+  z-index: 2;
+}
+
+.card__glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(0, 100, 255, 0.4) 40%,
+    rgba(255, 0, 50, 0.4) 60%,
+    transparent 80%
+  );
+  mix-blend-mode: overlay;
+}
+
+.card:hover .card__glare {
+  opacity: 1;
+}
+
+.card__particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover .card__particles {
+  opacity: 1;
+}

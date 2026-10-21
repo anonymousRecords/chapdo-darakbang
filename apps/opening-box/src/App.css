@@ -1,0 +1,112 @@
+.box-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.title {
+  font-family: "Playwrite CZ", cursive;
+  transform: rotate(-90deg);
+}
+
+.card-container {
+  width: clamp(200px, 600px, 600px);
+  height: 600px;
+  pointer-events: none;
+  /* border: 2px dashed red; */
+  position: relative;
+}
+
+.box-wrapper {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  pointer-events: auto;
+}
+
+.card {
+  aspect-ratio: 1 / 1;
+  border-radius: 1vmin;
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+  transition:
+    transform 600ms cubic-bezier(0.18, 0.89, 0.32, 1.28),
+    opacity 500ms ease-out;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50000;
+}
+
+.card:nth-child(1) {
+  background-image: url("https://i.pinimg.com/1200x/12/08/2d/12082d516103bd912249a2b2e049a379.jpg");
+}
+.card:nth-child(2) {
+  background-image: url("https://i.pinimg.com/1200x/da/00/a2/da00a20145f37055446a9c7dadc67b1e.jpg");
+}
+.card:nth-child(3) {
+  background-image: url("https://i.pinimg.com/736x/93/eb/b2/93ebb2afd64f3a9f1a39005dc6265c3e.jpg");
+}
+.card:nth-child(4) {
+  background-image: url("https://i.pinimg.com/1200x/00/02/d1/0002d11fd45fc9180dc912525833768d.jpg");
+}
+.card:nth-child(5) {
+  background-image: url("https://i.pinimg.com/736x/41/57/33/415733230ddb3f1a7a635a92928dce7c.jpg");
+}
+
+.card-container--exploded .card {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.card-container--exploded .card:nth-child(1) {
+  width: clamp(50px, 200px, 200px);
+  top: 43%;
+  left: 20%;
+  transform: translate(-50%, -50%) rotate(-20deg) scale(1);
+}
+
+.card-container--exploded .card:nth-child(2) {
+  width: clamp(80px, 100px, 100px);
+  top: 15%;
+  left: 30%;
+  transform: translate(-50%, -50%) rotate(-10deg) scale(1);
+}
+
+.card-container--exploded .card:nth-child(3) {
+  width: clamp(80px, 150px, 150px);
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%) rotate(-15deg) scale(1);
+}
+
+.card-container--exploded .card:nth-child(4) {
+  width: clamp(100px, 200px, 200px);
+  top: 20%;
+  left: 60%;
+  transform: translate(-50%, -50%) rotate(40deg) scale(1);
+}
+
+.card-container--exploded .card:nth-child(5) {
+  width: clamp(80px, 150px, 150px);
+  top: 45%;
+  left: 85%;
+  transform: translate(-50%, -50%) rotate(35deg) scale(1);
+}
+
+.card:hover {
+  background-size: 105%;
+  scale: 1.05;
+  transform:
+    background-size 500ms ease,
+    scale 500ms ease;
+}

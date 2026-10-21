@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hover-card-effect</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <script>
+      (function() {
+        try { if (window.self !== window.top) return; } catch (e) { return; }
+        var MOBILE_BREAKPOINT = 768;
+        var MESSAGE = "데스크탑 환경에서만 접속 가능해요.";
+        function showMobileBlock() {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;padding:20px;text-align:center;font-family:system-ui,sans-serif;box-sizing:border-box;"><p style="font-size:18px;color:#333;margin:0;">' + MESSAGE + '</p></div>';
+        }
+        if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock();
+        window.addEventListener('resize', function() { if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock(); });
+      })();
+    </script>
+    <div class="card-swiper">
+      <div class="card-groups">
+        <div class="card-group" data-index="0" data-status="active">
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+        </div>
+        <div class="card-group" data-index="1" data-status="unknown">
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+        </div>
+        <div class="card-group" data-index="2" data-status="unknown">
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+          <div class="little-card card"></div>
+          <div class="big-card card"></div>
+        </div>
+      </div>
+      <div class="card-swiper-buttons">
+        <button id="hate-button" onclick="handleHateClick()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g fill="none">
+              <path
+                fill="white"
+                d="m15 14l-.986.164A1 1 0 0 1 15 13v1ZM4 14v1a1 1 0 0 1-1-1h1Zm16.522-2.392l.98-.196l-.98.196ZM6 3h11.36v2H6V3Zm12.56 12H15v-2h3.56v2Zm-2.573-1.164l.805 4.835L14.82 19l-.806-4.836l1.973-.328ZM14.82 21h-.214v-2h.214v2Zm-3.543-1.781l-2.515-3.774l1.664-1.11l2.516 3.774l-1.665 1.11ZM7.93 15H4v-2h3.93v2ZM3 14V6h2v8H3Zm17.302-8.588l1.2 6l-1.96.392l-1.2-6l1.96-.392ZM8.762 15.445A1 1 0 0 0 7.93 15v-2a3 3 0 0 1 2.496 1.336l-1.664 1.11Zm8.03 3.226A2 2 0 0 1 14.82 21v-2l1.972-.329ZM18.56 13a1 1 0 0 0 .981-1.196l1.961-.392A3 3 0 0 1 18.561 15v-2Zm-1.2-10a3 3 0 0 1 2.942 2.412l-1.96.392A1 1 0 0 0 17.36 5V3Zm-2.754 18a4 4 0 0 1-3.329-1.781l1.665-1.11a2 2 0 0 0 1.664.891v2ZM6 5a1 1 0 0 0-1 1H3a3 3 0 0 1 3-3v2Z"
+              />
+              <path stroke="white" stroke-width="2" d="M8 14V4" />
+            </g>
+          </svg>
+        </button>
+        <button id="love-button" onclick="handleLoveClick()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g fill="none">
+              <path
+                fill="white"
+                d="m15 10l-.986-.164A1 1 0 0 0 15 11v-1ZM4 10V9a1 1 0 0 0-1 1h1Zm16.522 2.392l.98.196l-.98-.196ZM6 21h11.36v-2H6v2ZM18.56 9H15v2h3.56V9Zm-2.573 1.164l.805-4.835L14.82 5l-.806 4.836l1.973.328ZM14.82 3h-.214v2h.214V3Zm-3.543 1.781L8.762 8.555l1.664 1.11l2.516-3.774l-1.665-1.11ZM7.93 9H4v2h3.93V9ZM3 10v8h2v-8H3Zm17.302 8.588l1.2-6l-1.96-.392l-1.2 6l1.96.392ZM8.762 8.555A1 1 0 0 1 7.93 9v2a3 3 0 0 0 2.496-1.336l-1.664-1.11Zm8.03-3.226A2 2 0 0 0 14.82 3v2l1.972.329ZM18.56 11a1 1 0 0 1 .981 1.196l1.961.392A3 3 0 0 0 18.561 9v2Zm-1.2 10a3 3 0 0 0 2.942-2.412l-1.96-.392a1 1 0 0 1-.982.804v2ZM14.606 3a4 4 0 0 0-3.329 1.781l1.665 1.11A2 2 0 0 1 14.606 5V3ZM6 19a1 1 0 0 1-1-1H3a3 3 0 0 0 3 3v-2Z"
+              />
+              <path stroke="white" stroke-width="2" d="M8 10v10" />
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script>
+      let activeIndex = 0;
+
+      const groups = document.getElementsByClassName("card-group");
+
+      const handleLoveClick = () => {
+        const nextIndex =
+          activeIndex + 1 <= groups.length - 1 ? activeIndex + 1 : 0;
+
+        const currentGroup = document.querySelector(
+            `[data-index="${activeIndex}"]`
+          ),
+          nextGroup = document.querySelector(`[data-index="${nextIndex}"]`);
+
+        currentGroup.dataset.status = "after";
+
+        nextGroup.dataset.status = "becoming-active-from-before";
+
+        setTimeout(() => {
+          nextGroup.dataset.status = "active";
+          activeIndex = nextIndex;
+        });
+      };
+
+      const handleHateClick = () => {
+        const nextIndex =
+          activeIndex - 1 >= 0 ? activeIndex - 1 : groups.length - 1;
+
+        const currentGroup = document.querySelector(
+            `[data-index="${activeIndex}"]`
+          ),
+          nextGroup = document.querySelector(`[data-index="${nextIndex}"]`);
+
+        currentGroup.dataset.status = "before";
+
+        nextGroup.dataset.status = "becoming-active-from-after";
+
+        setTimeout(() => {
+          nextGroup.dataset.status = "active";
+          activeIndex = nextIndex;
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>website-header</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <script type="module" src="/src/main.js"></script>
+  <body>
+    <script>
+      (function() {
+        try { if (window.self !== window.top) return; } catch (e) { return; }
+        var MOBILE_BREAKPOINT = 768;
+        var MESSAGE = "데스크탑 환경에서만 접속 가능해요.";
+        function showMobileBlock() {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;padding:20px;text-align:center;font-family:system-ui,sans-serif;box-sizing:border-box;"><p style="font-size:18px;color:#333;margin:0;">' + MESSAGE + '</p></div>';
+        }
+        if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock();
+        window.addEventListener('resize', function() { if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock(); });
+      })();
+    </script>
+    <div id="left-side" class="side">
+      <h2 class="title">
+        Nothing beats winter snacks like
+        <br />
+        <span class="fancy">Hotteok</span>
+      </h2>
+    </div>
+    <div id="right-side" class="side">
+      <h2 class="title">
+        Nothing beats winter snacks like
+        <span class="fancy">Bungeoppang</span>
+      </h2>
+    </div>
+  </body>
+</html>

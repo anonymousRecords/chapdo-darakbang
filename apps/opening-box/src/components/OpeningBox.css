@@ -1,0 +1,196 @@
+:root {
+  --box-size: 200px;
+  --box-color: #dcb386;
+  --flap-color: #cd9f6d;
+  --inner-color: #bfa07a;
+  --border-color: #a67c52;
+}
+
+.box-container * {
+  box-sizing: border-box;
+}
+
+.scene {
+  width: 300px;
+  height: 300px;
+  perspective: 1500px;
+  animation-delay: 0.3s;
+  transform: scale3d(0.6, 0.5, 0.6);
+  background-color: transparent;
+}
+
+.box-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotate3d(1, 0, 0, -23deg) rotate3d(0, 1, 0, 50deg)
+    translate3D(150px, 100px, -150px);
+}
+
+/* --- FACE --- */
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--box-color);
+  border: 2px solid var(--border-color);
+}
+
+.face-front {
+  background-color: var(--box-color);
+  transform: translate3d(0, 0, 150px);
+}
+
+.face-back {
+  background-color: var(--inner-color);
+  transform: rotate3d(0, 1, 0, 180deg) translate3d(0, 0, 150px);
+}
+
+.face-left {
+  transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, 150px);
+}
+
+.face-right {
+  background-color: var(--inner-color);
+  transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, 150px);
+}
+
+.face-bottom {
+  transform: rotate3d(1, 0, 0, -90deg) translate3d(0, 0, 150px);
+}
+
+/* --- FLAPS --- */
+.lid-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transform-style: preserve-3d;
+  transform: rotate3d(1, 0, 0, 90deg) translate3d(0, 0, 150px);
+}
+
+.flap {
+  position: absolute;
+  border: 1px solid var(--border-color);
+  background-color: var(--flap-color);
+}
+
+.flap-left {
+  width: 50%;
+  height: 100%;
+  transform-origin: left center;
+}
+
+.flap-right {
+  width: 50%;
+  height: 100%;
+  right: 0;
+  transform-origin: right center;
+}
+
+.flap-top {
+  width: 100%;
+  height: 50%;
+  transform-origin: center top;
+}
+
+.flap-bottom {
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  transform-origin: center bottom;
+}
+
+.scene.scene--opened .flap-left {
+  animation-name: flapOpen;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.scene.scene--opened .flap-right {
+  animation-name: flapRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.scene.scene--opened .flap-top {
+  animation-name: flapTop;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.scene.scene--opened .flap-bottom {
+  animation-name: flapBottom;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+/* --- Keyframes --- */
+@keyframes flapOpen {
+  from {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  50% {
+    transform: rotate3d(0, 1, 0, -190deg);
+  }
+  70% {
+    transform: rotate3d(0, 1, 0, -150deg);
+  }
+  to {
+    transform: rotate3d(0, 1, 0, -190deg);
+  }
+}
+
+@keyframes flapRight {
+  from {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  50% {
+    transform: rotate3d(0, 1, 0, 170deg);
+  }
+  70% {
+    transform: rotate3d(0, 1, 0, 100deg);
+  }
+  to {
+    transform: rotate3d(0, 1, 0, 140deg);
+  }
+}
+
+@keyframes flapTop {
+  from {
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+  50% {
+    transform: rotate3d(1, 0, 0, 190deg);
+  }
+  70% {
+    transform: rotate3d(1, 0, 0, 130deg);
+  }
+  to {
+    transform: rotate3d(1, 0, 0, 140deg);
+  }
+}
+
+@keyframes flapBottom {
+  from {
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+  50% {
+    transform: rotate3d(1, 0, 0, -190deg);
+  }
+  70% {
+    transform: rotate3d(1, 0, 0, -150deg);
+  }
+  to {
+    transform: rotate3d(1, 0, 0, -190deg);
+  }
+}

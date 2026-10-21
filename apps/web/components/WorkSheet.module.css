@@ -82,11 +82,55 @@
 .body {
   position: relative;
   z-index: 1;
-  overflow-y: auto;
+  overflow: hidden;
   overscroll-behavior: contain;
   flex: 1;
   min-height: 0;
   padding: 0 2px calc(28px + env(safe-area-inset-bottom));
+}
+
+.body :global(.artwork iframe) {
+  height: min(360px, 45dvh);
+}
+
+.body :global(.work-recording-image) {
+  display: block;
+  max-height: min(360px, 45dvh);
+  object-fit: contain;
+}
+
+.body :global(.work-recording) {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.body :global(.work-recording figcaption) {
+  padding: 10px 0 0;
+}
+
+.body :global(.work-recording a) {
+  font-size: 14px;
+}
+
+.body :global(.post-story) {
+  max-width: 62ch;
+  margin: clamp(24px, 3dvh, 36px) auto 28px;
+}
+
+.body :global(.post-story > h2) {
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.body :global(.prose) {
+  max-width: 62ch;
+  font-size: clamp(15px, 1.15vw, 16px);
+  line-height: 1.8;
+}
+
+.body :global(.prose p) {
+  margin: 0 0 16px;
 }
 
 .sheet[data-expanded="true"] {

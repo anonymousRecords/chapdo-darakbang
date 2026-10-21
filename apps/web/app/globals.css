@@ -14,7 +14,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family:
-    var(--font-inter), var(--font-pretendard), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    var(--font-pretendard), var(--font-inter), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   -webkit-font-smoothing: antialiased;
   line-height: 1.7;
 }

@@ -7,7 +7,8 @@ import { Drawer } from "vaul";
 import styles from "./WorkSheet.module.css";
 
 const PREVIEW = 0.65;
-const SNAP_POINTS = [PREVIEW, 1];
+const MAX_SNAP = 0.94;
+const SNAP_POINTS = [PREVIEW, MAX_SNAP];
 
 export function WorkSheet({ slug, date, title, englishTitle, unpublished, className, children }: {
   slug: string;
@@ -37,7 +38,6 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
       activeSnapPoint={snap}
       setActiveSnapPoint={setSnap}
       fadeFromIndex={0}
-      handleOnly
       autoFocus
     >
       <Drawer.Trigger asChild>
@@ -60,7 +60,16 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className={styles.overlay} />
-        <Drawer.Content className={styles.sheet} data-expanded={snap === 1} aria-describedby={undefined}>
+        <Drawer.Content
+          className={styles.sheet}
+          data-expanded={snap === MAX_SNAP}
+          aria-describedby={undefined}
+          onWheel={(event) => {
+            if (!window.matchMedia("(pointer: fine)").matches) return;
+            event.preventDefault();
+            setSnap(MAX_SNAP);
+          }}
+        >
           <Drawer.Handle className={styles.handle} preventCycle aria-label={locale === "ko" ? "바텀시트 높이 조절" : "Resize preview panel"} />
           <header className={styles.header}>
             <div>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mouse-move-image-gallery</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <script>
+      (function() {
+        try { if (window.self !== window.top) return; } catch (e) { return; }
+        var MOBILE_BREAKPOINT = 768;
+        var MESSAGE = "데스크탑 환경에서만 접속 가능해요.";
+        function showMobileBlock() {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;padding:20px;text-align:center;font-family:system-ui,sans-serif;box-sizing:border-box;"><p style="font-size:18px;color:#333;margin:0;">' + MESSAGE + '</p></div>';
+        }
+        if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock();
+        window.addEventListener('resize', function() { if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock(); });
+      })();
+    </script>
+    <img
+      class="image"
+      data-index="0"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/84/5c/89/845c896b38b18b9e76a5748d56d4de88.jpg"
+    />
+    <img
+      class="image"
+      data-index="1"
+      data-status="inactive"
+      src="https://i.pinimg.com/1200x/5a/82/f5/5a82f52af70d0d19ce7970f57a65fa5d.jpg"
+    />
+    <img
+      class="image"
+      data-index="2"
+      data-status="inactive"
+      src="https://i.pinimg.com/1200x/35/24/7c/35247c6b276b883a5073b23ee0ec932e.jpg"
+    />
+    <img
+      class="image"
+      data-index="3"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/04/87/0d/04870d6253255a8229e3ec701a5e4297.jpg"
+    />
+    <img
+      class="image"
+      data-index="4"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/8b/0e/c2/8b0ec2bfaf8bdc61a87fa785235f29e1.jpg"
+    />
+    <img
+      class="image"
+      data-index="5"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/3e/4f/91/3e4f91c8c0e8a243f637fddd29017de0.jpg"
+    />
+    <img
+      class="image"
+      data-index="6"
+      data-status="inactive"
+      src="https://i.pinimg.com/1200x/7d/ef/1e/7def1e13b878405623f041c5b96e7a60.jpg"
+    />
+    <img
+      class="image"
+      data-index="7"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/7c/b8/81/7cb88150e438421347e3dd64f31a609d.jpg"
+    />
+    <img
+      class="image"
+      data-index="8"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/5f/b0/8d/5fb08de4e0774e7d0196279760dec2ee.jpg"
+    />
+    <img
+      class="image"
+      data-index="9"
+      data-status="inactive"
+      src="https://i.pinimg.com/736x/d8/2c/b2/d82cb28958ded3e4ac9ea78e1b9220e8.jpg"
+    />
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

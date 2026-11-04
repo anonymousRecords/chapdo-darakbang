@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stranger Things Tilt Card</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="scene">
+      <div class="card">
+        <div class="card__layer card__layer--back">
+          <img src="/layers/background.png" alt="Background" />
+        </div>
+
+        <div class="card__layer card__layer--front">
+          <img src="/layers/foreground.png" alt="Characters" />
+        </div>
+
+        <div class="card__glare"></div>
+
+        <canvas class="card__particles"></canvas>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

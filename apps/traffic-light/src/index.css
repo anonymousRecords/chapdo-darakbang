@@ -1,0 +1,466 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  scroll-behavior: smooth;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
+}
+
+body {
+  --bg-light: #fff;
+  --bg-light2: #fbf9fa;
+  --bg-sunset: #ffbd8d;
+  --shadow-color: #c7c7c7;
+  --shadow-transition: #e8e6e5a5;
+  --loading-color: #d1d1d1;
+  height: 100vh;
+  margin: 0;
+  width: 100vw;
+}
+
+.wrapper {
+  background: linear-gradient(85deg, var(--bg-light), var(--bg-light2));
+}
+
+/* .container {
+  perspective: 50vw;
+  position: fixed;
+  transform: rotate(-20deg);
+  width: 100vw;
+} */
+
+.container,
+.sunset-container {
+  transition: transform 1.2s ease-out;
+}
+
+.sunset-container {
+  transform: rotate(-16deg) translateX(10vw);
+}
+
+.blur-overlay {
+  background: linear-gradient(
+    85deg,
+    var(--bg-light2),
+    var(--bg-light2) 20%,
+    #0000
+  );
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.shutters {
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  transition: transform 1.8s ease-in-out;
+}
+
+.shutters-turn > div {
+  height: 20px;
+  margin-top: 18px;
+}
+
+.progressive-blur {
+  height: 100vw;
+  left: calc(50vw - 100vh);
+  margin: 0;
+  pointer-events: none;
+  position: fixed;
+  top: calc(50vh - 50vw);
+  transform: rotate(90deg);
+  width: 100vh;
+  z-index: 5;
+}
+
+.progressive-blur:after,
+.progressive-blur:before,
+.progressive-blur > div {
+  inset: 0;
+  position: fixed;
+}
+
+.progressive-blur:before {
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  content: "";
+  -webkit-mask: linear-gradient(
+    180deg,
+    #0000 0,
+    #000 12.5%,
+    #000 25%,
+    #0000 37.5%
+  );
+  mask: linear-gradient(180deg, #0000 0, #000 12.5%, #000 25%, #0000 37.5%);
+  z-index: 1;
+}
+
+.progressive-blur > div:first-of-type {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-mask: linear-gradient(
+    180deg,
+    #0000 12.5%,
+    #000 25%,
+    #000 37.5%,
+    #0000 50%
+  );
+  mask: linear-gradient(180deg, #0000 12.5%, #000 25%, #000 37.5%, #0000 50%);
+  z-index: 2;
+}
+
+.progressive-blur > div:nth-of-type(2) {
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  -webkit-mask: linear-gradient(
+    180deg,
+    #0000 25%,
+    #000 37.5%,
+    #000 50%,
+    #0000 62.5%
+  );
+  mask: linear-gradient(180deg, #0000 25%, #000 37.5%, #000 50%, #0000 62.5%);
+  z-index: 3;
+}
+
+.progressive-blur > div:nth-of-type(3) {
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  -webkit-mask: linear-gradient(
+    180deg,
+    #0000 37.5%,
+    #000 50%,
+    #000 62.5%,
+    #0000 75%
+  );
+  mask: linear-gradient(180deg, #0000 37.5%, #000 50%, #000 62.5%, #0000 75%);
+  z-index: 4;
+}
+
+.progressive-blur > div:nth-of-type(4) {
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  -webkit-mask: linear-gradient(
+    180deg,
+    #0000 50%,
+    #000 62.5%,
+    #000 75%,
+    #0000 87.5%
+  );
+  mask: linear-gradient(180deg, #0000 50%, #000 62.5%, #000 75%, #0000 87.5%);
+  z-index: 5;
+}
+
+.progressive-blur > div:nth-of-type(5) {
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  -webkit-mask: linear-gradient(
+    180deg,
+    #0000 62.5%,
+    #000 75%,
+    #000 87.5%,
+    #0000
+  );
+  mask: linear-gradient(180deg, #0000 62.5%, #000 75%, #000 87.5%, #0000);
+  z-index: 6;
+}
+
+.progressive-blur > div:nth-of-type(6) {
+  -webkit-mask: linear-gradient(180deg, #0000 75%, #000 87.5%, #000);
+  mask: linear-gradient(180deg, #0000 75%, #000 87.5%, #000);
+  z-index: 7;
+}
+
+.progressive-blur:after,
+.progressive-blur > div:nth-of-type(6) {
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+}
+
+.progressive-blur:after {
+  content: "";
+  -webkit-mask: linear-gradient(180deg, #0000 87.5%, #000);
+  mask: linear-gradient(180deg, #0000 87.5%, #000);
+  z-index: 8;
+}
+
+.shutter {
+  background: linear-gradient(
+      200deg,
+      var(--shadow-color),
+      var(--shadow-transition) 30%,
+      #0000
+    ),
+    url(#noiseFilter);
+  border-bottom: 10px solid #0000;
+  border-left: 100vw solid var(--shadow-color);
+  border-top: 10px solid #0000;
+  right: 0;
+  transform: translate(12vw) rotateY(4deg);
+  transition: top 0.5s ease-in-out, left 0.5s ease-in-out,
+    height 0.5s ease-in-out;
+  width: 80vw;
+}
+
+.shutter,
+.vertical-shutter {
+  filter: blur(6px);
+  position: fixed;
+}
+
+.vertical-shutter {
+  background: var(--shadow-color);
+  height: 100vh;
+  right: 30vw;
+  top: 0;
+  width: 24px;
+}
+
+.leaf-wrapper {
+  position: fixed;
+  width: 100px;
+}
+
+.leaf-wrapper,
+.leaf-wrapper > div {
+  border-radius: 0 70px;
+  height: 100px;
+}
+
+.leaf-wrapper > div {
+  animation: fall ease-in-out infinite;
+  background: var(--shadow-color);
+  width: 100%;
+}
+
+.tree-leaf-wrapper {
+  height: 100px;
+  position: fixed;
+  width: 100px;
+}
+
+.trees {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.trees-hidden {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.tree-leaf-wrapper > div {
+  background: var(--shadow-color);
+  height: 100px;
+  width: 100%;
+}
+
+.leaf-1 {
+  border-radius: 0 70px;
+}
+
+.leaf-2 {
+  border-radius: 0 80px;
+}
+
+.leaf-3 {
+  border-radius: 0 90px;
+}
+
+.leaf-4 {
+  border-radius: 0 100px;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+  }
+
+  20% {
+    opacity: 0.8;
+    transform: translateY(20vh) translateX(-50px) scale(1) rotate(45deg);
+  }
+
+  40% {
+    opacity: 0.8;
+    transform: translateY(40vh) translateX(50px) scale(1) rotate(-45deg);
+  }
+
+  to {
+    opacity: 0.8;
+    transform: translateY(100vh) translateX(0) scale(1.2) rotate(180deg);
+  }
+}
+
+.grain {
+  filter: brightness(120%) sepia(50%);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.grain:before {
+  animation: noise 1s steps(2) infinite;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png);
+  content: "";
+  height: calc(100% + 20rem);
+  left: -10rem;
+  opacity: 0.12;
+  pointer-events: none;
+  position: fixed;
+  top: -10rem;
+  width: calc(100% + 20rem);
+}
+
+@keyframes noise {
+  0% {
+    transform: translate3d(0, 2rem, 0);
+  }
+
+  10% {
+    transform: translate3d(-1rem, -2rem, 0);
+  }
+
+  20% {
+    transform: translate3d(-4rem, 1rem, 0);
+  }
+
+  30% {
+    transform: translate3d(4.5rem, -4.5rem, 0);
+  }
+
+  40% {
+    transform: translate3d(-1rem, 3.5rem, 0);
+  }
+
+  50% {
+    transform: translate3d(-4.5rem, -2rem, 0);
+  }
+
+  60% {
+    transform: translate3d(1rem, 3rem, 0);
+  }
+
+  70% {
+    transform: translate3d(3.5rem, -4rem, 0);
+  }
+
+  80% {
+    transform: translate3d(-4.5rem, 0.5rem, 0);
+  }
+
+  90% {
+    transform: translate3d(3rem, -2.5rem, 0);
+  }
+
+  to {
+    transform: translate3d(-3.5rem, 0, 0);
+  }
+}
+
+.sunset-toggle {
+  background-color: initial;
+  border: none;
+  left: 20px;
+  padding: 10px;
+  position: fixed;
+  top: 20px;
+  transition: opacity 0.05s ease-out;
+  z-index: 1000;
+}
+
+.sunset-toggle:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.sunset-toggle:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.sunset-toggle > div {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  height: 18px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 18px;
+}
+
+#sun {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='18' width='18' viewBox='0 0 207.628 207.628' xml:space='preserve'%3E%3Ccircle cx='103.814' cy='103.814' r='45.868'/%3E%3Cpath d='M103.814 157.183c-29.427 0-53.368-23.941-53.368-53.368s23.941-53.368 53.368-53.368 53.368 23.941 53.368 53.368-23.941 53.368-53.368 53.368zm0-91.737c-21.156 0-38.368 17.212-38.368 38.368s17.212 38.368 38.368 38.368 38.368-17.212 38.368-38.368-17.212-38.368-38.368-38.368zM103.814 39.385a7.5 7.5 0 0 1-7.5-7.5V7.5a7.5 7.5 0 0 1 15 0v24.385a7.5 7.5 0 0 1-7.5 7.5zM103.814 207.628a7.5 7.5 0 0 1-7.5-7.5v-24.385a7.5 7.5 0 0 1 15 0v24.385a7.5 7.5 0 0 1-7.5 7.5zM200.128 111.314h-24.385a7.5 7.5 0 0 1 0-15h24.385a7.5 7.5 0 0 1 0 15zM31.885 111.314H7.5a7.5 7.5 0 0 1 0-15h24.385a7.5 7.5 0 0 1 0 15zM154.676 60.452a7.474 7.474 0 0 1-5.303-2.197 7.5 7.5 0 0 1 0-10.606l17.243-17.242a7.498 7.498 0 0 1 10.606 0 7.5 7.5 0 0 1 0 10.606l-17.243 17.242a7.474 7.474 0 0 1-5.303 2.197zM35.709 179.419a7.474 7.474 0 0 1-5.303-2.197 7.5 7.5 0 0 1 0-10.606l17.243-17.243a7.5 7.5 0 0 1 10.606 0 7.5 7.5 0 0 1 0 10.606l-17.243 17.243a7.472 7.472 0 0 1-5.303 2.197zM171.918 179.419a7.474 7.474 0 0 1-5.303-2.197l-17.243-17.243a7.5 7.5 0 0 1 0-10.606 7.5 7.5 0 0 1 10.606 0l17.243 17.243a7.5 7.5 0 0 1 0 10.606 7.472 7.472 0 0 1-5.303 2.197zM52.952 60.452a7.474 7.474 0 0 1-5.303-2.197L30.406 41.013a7.5 7.5 0 0 1 0-10.606 7.498 7.498 0 0 1 10.606 0l17.243 17.242a7.5 7.5 0 0 1 0 10.606 7.472 7.472 0 0 1-5.303 2.197z'/%3E%3C/svg%3E");
+}
+
+.sun {
+  opacity: 0.5 !important;
+  transition: opacity 0.15s ease-out;
+  transition-delay: 0.03s;
+}
+
+.sun-hidden {
+  opacity: 0 !important;
+  transition: opacity 0.05s ease-out;
+}
+
+#moon {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M17.39 15.14A7.33 7.33 0 0 1 11.75 1.6c.23-.11.56-.23.79-.34a8.19 8.19 0 0 0-5.41.45 9 9 0 1 0 7 16.58 8.42 8.42 0 0 0 4.29-3.84 5.3 5.3 0 0 1-1.03.69z'/%3E%3C/svg%3E");
+}
+
+.moon {
+  opacity: 0.5 !important;
+  transition: opacity 0.15s ease-out;
+  transition-delay: 0.03s;
+}
+
+.moon-hidden {
+  opacity: 0 !important;
+  transition: opacity 0.05s ease-out;
+}
+
+.sunset-overlay {
+  background-color: var(--bg-sunset);
+  filter: brightness(1.02);
+  height: 100%;
+  left: 0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 3s ease-in-out;
+  width: 100%;
+  z-index: 101;
+}
+
+.sunset-show {
+  opacity: 1;
+}
+
+.loading-overlay {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.loading-overlay-show {
+  background: var(--loading-color);
+  height: 100%;
+  opacity: 1;
+  width: 100%;
+}

@@ -2,10 +2,14 @@
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
   "tasks": {
+    "//#gen:registry": {
+      "inputs": ["apps/*/meta.json", "packages/scripts/gen-registry/**"],
+      "outputs": ["apps/web/app/registry.ts"]
+    },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "//#gen:registry"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -14,8 +18,15 @@
       "dependsOn": ["^check-types"]
     },
     "dev": {
+      "dependsOn": ["//#gen:registry"],
       "cache": false,
       "persistent": true
+    },
+    "web#build": {
+      "dependsOn": ["^build", "//#gen:registry"],
+      "cache": false,
+      "outputs": [".next/**", "!.next/cache/**", "out/**"]
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV"]
 }

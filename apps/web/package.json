@@ -1,0 +1,36 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tsx ../../packages/scripts/gen-registry/index.ts && tsx scripts/dev.ts",
+    "build": "tsx ../../packages/scripts/gen-registry/index.ts && tsx scripts/generate-works.ts && next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsx ../../packages/scripts/gen-registry/index.ts && tsx scripts/generate-works.ts --include-drafts && tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "gen:works": "tsx ../../packages/scripts/gen-registry/index.ts && tsx scripts/generate-works.ts",
+    "new:work": "tsx ../../packages/scripts/gen-registry/index.ts && tsx scripts/new-work.ts"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^3.1.1",
+    "@repo/ui": "workspace:*",
+    "gray-matter": "^4.0.3",
+    "next": "15.3.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remark-gfm": "^4.0.1",
+    "vaul": "^1.1.2"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3",
+    "@types/react": "19.2.9",
+    "@types/react-dom": "19.2.3",
+    "eslint": "^9.34.0",
+    "tsx": "^4.20.6",
+    "typescript": "5.9.2"
+  }
+}

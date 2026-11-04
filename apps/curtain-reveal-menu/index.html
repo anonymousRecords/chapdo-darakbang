@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>curtain-reveal-menu</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <script>
+      (function() {
+        try { if (window.self !== window.top) return; } catch (e) { return; }
+        var MOBILE_BREAKPOINT = 768;
+        var MESSAGE = "데스크탑 환경에서만 접속 가능해요.";
+        function showMobileBlock() {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;padding:20px;text-align:center;font-family:system-ui,sans-serif;box-sizing:border-box;"><p style="font-size:18px;color:#333;margin:0;">' + MESSAGE + '</p></div>';
+        }
+        if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock();
+        window.addEventListener('resize', function() { if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock(); });
+      })();
+    </script>
+    <main></main>
+
+    <nav>
+      <div id="nav-links">
+        <a class="nav-link" href="#">
+          <h2 class="nav-link-label rubik-font">Home</h2>
+          <img
+            class="nav-link-image"
+            src="https://i.pinimg.com/1200x/35/70/00/3570000ed04587639877c2d4826576c5.jpg"
+          />
+        </a>
+        <a class="nav-link" href="#">
+          <h2 class="nav-link-label rubik-font">Work</h2>
+          <img
+            class="nav-link-image"
+            src="https://i.pinimg.com/736x/13/ef/7c/13ef7cbcfab9856794f337e149379355.jpg"
+          />
+        </a>
+        <a class="nav-link" href="#">
+          <h2 class="nav-link-label rubik-font">About</h2>
+          <img
+            class="nav-link-image"
+            src="https://i.pinimg.com/736x/6d/af/35/6daf35f71d093c2e2b15184e7cd2e60f.jpg"
+          />
+        </a>
+        <a class="nav-link" href="#">
+          <h2 class="nav-link-label rubik-font">Contact</h2>
+          <img
+            class="nav-link-image"
+            src="https://i.pinimg.com/736x/7c/b8/81/7cb88150e438421347e3dd64f31a609d.jpg"
+          />
+        </a>
+        <a class="nav-link" href="#">
+          <h2 class="nav-link-label rubik-font">Join Us</h2>
+          <img
+            class="nav-link-image"
+            src="https://i.pinimg.com/1200x/7d/ef/1e/7def1e13b878405623f041c5b96e7a60.jpg"
+          />
+        </a>
+      </div>
+    </nav>
+
+    <button id="nav-toggle" type="button" onclick="toggleNav()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="#ffffff"
+        class="open"
+      >
+        <g
+          id="feBar0"
+          fill="none"
+          fill-rule="evenodd"
+          stroke="none"
+          stroke-width="1"
+        >
+          <g id="feBar1" fill="#ffffff">
+            <path
+              id="feBar2"
+              d="M3 16h18v2H3v-2Zm0-5h18v2H3v-2Zm0-5h18v2H3V6Z"
+            />
+          </g>
+        </g>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        class="close"
+      >
+        <path
+          fill="#ffffff"
+          d="m3.219 2.154l6.778 6.773l6.706-6.705c.457-.407.93-.164 1.119.04a.777.777 0 0 1-.044 1.035l-6.707 6.704l6.707 6.702c.298.25.298.74.059 1.014c-.24.273-.68.431-1.095.107l-6.745-6.749l-6.753 6.752c-.296.265-.784.211-1.025-.052c-.242-.264-.334-.72-.025-1.042l6.729-6.732l-6.701-6.704c-.245-.27-.33-.764 0-1.075c.33-.311.822-.268.997-.068Z"
+        />
+      </svg>
+    </button>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      const toggleNav = () => {
+        document.body.dataset.nav =
+          document.body.dataset.nav === "true" ? "false" : "true";
+      };
+    </script>
+  </body>
+</html>

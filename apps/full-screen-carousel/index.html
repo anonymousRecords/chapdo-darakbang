@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>full-screen-carousel</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <script>
+      (function() {
+        try { if (window.self !== window.top) return; } catch (e) { return; }
+        var MOBILE_BREAKPOINT = 768;
+        var MESSAGE = "데스크탑 환경에서만 접속 가능해요.";
+        function showMobileBlock() {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;padding:20px;text-align:center;font-family:system-ui,sans-serif;box-sizing:border-box;"><p style="font-size:18px;color:#333;margin:0;">' + MESSAGE + '</p></div>';
+        }
+        if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock();
+        window.addEventListener('resize', function() { if (window.innerWidth < MOBILE_BREAKPOINT) showMobileBlock(); });
+      })();
+    </script>
+    <nav data-toggled="false" data-transitionable="false">
+      <div id="nav-logo-section" class="nav-section">
+        <a href="#">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ffffff"
+              d="M19.68 6.88a4.4 4.4 0 0 0-3.31-.32a4.37 4.37 0 0 0-8.73 0a4.48 4.48 0 0 0-3.31.29a4.37 4.37 0 0 0 .61 8a4.4 4.4 0 0 0-.8 2.5a5 5 0 0 0 .07.75a4.34 4.34 0 0 0 4.29 3.63a4.68 4.68 0 0 0 .64 0A4.42 4.42 0 0 0 12 20a4.42 4.42 0 0 0 2.86 1.69a4.68 4.68 0 0 0 .64 0a4.36 4.36 0 0 0 3.56-6.87a4.36 4.36 0 0 0 .62-8Zm-9.34-1.94a2.4 2.4 0 0 1 3.32 0a2.43 2.43 0 0 1 .52 2.66l-.26.59l-.66.58A4.07 4.07 0 0 0 12 8.55a4 4 0 0 0-1.61.34L9.83 7.6a2.39 2.39 0 0 1 .51-2.66Zm-6.1 6.84A2.37 2.37 0 0 1 7.94 9l.49.43l.35.8A3.92 3.92 0 0 0 8 12.55A2.85 2.85 0 0 0 8 13h-.55l-.84.08a2.37 2.37 0 0 1-2.37-1.3Zm6.6 6.08a2.38 2.38 0 0 1-4.66-.08a3.07 3.07 0 0 1 0-.42a2.33 2.33 0 0 1 1.17-2l.51-.36l.91-.1a4 4 0 0 0 2.38 1.57ZM12 14.55a2 2 0 1 1 2-2a2 2 0 0 1-2 2Zm5.82 3.22a2.36 2.36 0 0 1-2.68 1.94a2.39 2.39 0 0 1-2-1.85l-.14-.6l.21-.92a4 4 0 0 0 2.2-1.76l.5.3H16l.66.39a2.38 2.38 0 0 1 1.16 2.5Zm1.94-6a2.39 2.39 0 0 1-2.13 1.33h-.24l-.64-.1l-.75-.41a4 4 0 0 0-1-2.64l.43-.37l.63-.58a2.37 2.37 0 0 1 3.7 2.82Z"
+            />
+          </svg>
+        </a>
+      </div>
+      <div id="nav-mobile-section">
+        <div id="nav-link-section" class="nav-section">
+          <a href="#">ABOUT</a>
+          <a href="#">WORK</a>
+        </div>
+        <div id="nav-social-section" class="nav-section">
+          <a href="#">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="https://www.youtube.com/c/Hyperplexed" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+          <a href="#">
+            <i class="fa-brands fa-codepen"></i>
+          </a>
+        </div>
+        <div id="nav-contact-section" class="nav-section">
+          <a href="#">GET IN TOUCH</a>
+        </div>
+      </div>
+      <button id="nav-toggle-button" type="button" onclick="handleNavToggle()">
+        <span>Menu</span>
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+
+    <main>
+      <article data-index="0" data-status="active">
+        <div class="article-image-section article-section"></div>
+        <div class="article-description-section article-section">
+          <p>
+            This is a recreation (from scratch) of
+            <a
+              class="source-link"
+              href="https://www.dylanbrouwer.design/work"
+              target="_blank"
+              >dylanbrouwer.design/work</a
+            >. See how I did it
+            <a
+              class="yt-link"
+              href="https://youtu.be/nG2IyH43xMU"
+              target="_blank"
+              ><i class="fa-brands fa-youtube"></i></a
+            >.
+          </p>
+        </div>
+        <div class="article-title-section article-section">
+          <h2>Recreation From Scratch</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ffffff"
+              d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"
+            />
+          </svg>
+        </div>
+        <div class="article-nav-section article-section">
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleLeftClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m5 12l-.354-.354l-.353.354l.353.354zm12 .5a.5.5 0 0 0 0-1zM8.646 7.646l-4 4l.708.708l4-4zm-4 4.708l4 4l.708-.708l-4-4zM5 12.5h12v-1H5z"
+              />
+            </svg>
+          </button>
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleRightClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m18 12l.354-.354l.353.354l-.353.354zm-12 .5a.5.5 0 0 1 0-1zm8.354-4.854l4 4l-.708.708l-4-4zm4 4.708l-4 4l-.708-.708l4-4zM18 12.5H6v-1h12z"
+              />
+            </svg>
+          </button>
+        </div>
+      </article>
+      <article data-index="1" data-status="inactive">
+        <div class="article-image-section article-section"></div>
+        <div class="article-description-section article-section">
+          <p>
+            A place where books hang out waiting to be grabbed. But don't be too
+            grabby now, ya hear?
+          </p>
+        </div>
+        <div class="article-title-section article-section">
+          <h2>Wicked Cool Library Shelves</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ffffff"
+              d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"
+            />
+          </svg>
+        </div>
+        <div class="article-nav-section article-section">
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleLeftClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m5 12l-.354-.354l-.353.354l.353.354zm12 .5a.5.5 0 0 0 0-1zM8.646 7.646l-4 4l.708.708l4-4zm-4 4.708l4 4l.708-.708l-4-4zM5 12.5h12v-1H5z"
+              />
+            </svg>
+          </button>
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleRightClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m18 12l.354-.354l.353.354l-.353.354zm-12 .5a.5.5 0 0 1 0-1zm8.354-4.854l4 4l-.708.708l-4-4zm4 4.708l-4 4l-.708-.708l4-4zM18 12.5H6v-1h12z"
+              />
+            </svg>
+          </button>
+        </div>
+      </article>
+      <article data-index="2" data-status="inactive">
+        <div class="article-image-section article-section"></div>
+        <div class="article-description-section article-section">
+          <p>
+            The neatest lighthouse you ever saw. Ehh, actually it's kind of
+            messy. But that's why the pic is of the outside.
+          </p>
+        </div>
+        <div class="article-title-section article-section">
+          <h2>Neato Toledo Lighthouse</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ffffff"
+              d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"
+            />
+          </svg>
+        </div>
+        <div class="article-nav-section article-section">
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleLeftClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m5 12l-.354-.354l-.353.354l.353.354zm12 .5a.5.5 0 0 0 0-1zM8.646 7.646l-4 4l.708.708l4-4zm-4 4.708l4 4l.708-.708l-4-4zM5 12.5h12v-1H5z"
+              />
+            </svg>
+          </button>
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleRightClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m18 12l.354-.354l.353.354l-.353.354zm-12 .5a.5.5 0 0 1 0-1zm8.354-4.854l4 4l-.708.708l-4-4zm4 4.708l-4 4l-.708-.708l4-4zM18 12.5H6v-1h12z"
+              />
+            </svg>
+          </button>
+        </div>
+      </article>
+      <article data-index="3" data-status="inactive">
+        <div class="article-image-section article-section"></div>
+        <div class="article-description-section article-section">
+          <p>
+            The blobiest of blobs nestled deep in the heart of outer space.
+            Well, technically the universe is both infinite and homogeneous so
+            there isn't really a heart, per se.
+          </p>
+        </div>
+        <div class="article-title-section article-section">
+          <h2>Super Space Blob</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ffffff"
+              d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"
+            />
+          </svg>
+        </div>
+        <div class="article-nav-section article-section">
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleLeftClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m5 12l-.354-.354l-.353.354l.353.354zm12 .5a.5.5 0 0 0 0-1zM8.646 7.646l-4 4l.708.708l4-4zm-4 4.708l4 4l.708-.708l-4-4zM5 12.5h12v-1H5z"
+              />
+            </svg>
+          </button>
+          <button
+            class="article-nav-button"
+            type="button"
+            onclick="handleRightClick()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffffff"
+                d="m18 12l.354-.354l.353.354l-.353.354zm-12 .5a.5.5 0 0 1 0-1zm8.354-4.854l4 4l-.708.708l-4-4zm4 4.708l-4 4l-.708-.708l4-4zM18 12.5H6v-1h12z"
+              />
+            </svg>
+          </button>
+        </div>
+      </article>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      /* -- Carousel Navigation -- */
+
+      let activeIndex = 0;
+
+      const slides = document.getElementsByTagName("article");
+
+      const handleLeftClick = () => {
+        const nextIndex =
+          activeIndex - 1 >= 0 ? activeIndex - 1 : slides.length - 1;
+
+        const currentSlide = document.querySelector(
+            `[data-index="${activeIndex}"]`
+          ),
+          nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+
+        currentSlide.dataset.status = "after";
+
+        nextSlide.dataset.status = "becoming-active-from-before";
+
+        setTimeout(() => {
+          nextSlide.dataset.status = "active";
+          activeIndex = nextIndex;
+        });
+      };
+
+      const handleRightClick = () => {
+        const nextIndex =
+          activeIndex + 1 <= slides.length - 1 ? activeIndex + 1 : 0;
+
+        const currentSlide = document.querySelector(
+            `[data-index="${activeIndex}"]`
+          ),
+          nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+
+        currentSlide.dataset.status = "before";
+
+        nextSlide.dataset.status = "becoming-active-from-after";
+
+        setTimeout(() => {
+          nextSlide.dataset.status = "active";
+          activeIndex = nextIndex;
+        });
+      };
+
+      /* -- Mobile Nav Toggle -- */
+
+      const nav = document.querySelector("nav");
+
+      const handleNavToggle = () => {
+        nav.dataset.transitionable = "true";
+
+        nav.dataset.toggled = nav.dataset.toggled === "true" ? "false" : "true";
+      };
+
+      window.matchMedia("(max-width: 800px)").onchange = (e) => {
+        nav.dataset.transitionable = "false";
+
+        nav.dataset.toggled = "false";
+      };
+    </script>
+  </body>
+</html>

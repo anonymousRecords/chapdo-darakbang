@@ -5,58 +5,96 @@
   background: rgb(0 0 0 / 30%);
 }
 
-.sheet {
+.reader {
   position: fixed;
-  inset: auto 16px 16px;
+  inset: 0;
   z-index: 21;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  background-color: #fffef9;
-  background-image:
-    repeating-linear-gradient(to bottom, transparent 0, transparent 24px, rgb(113 153 178 / 29%) 24px, rgb(113 153 178 / 29%) 25px),
-    radial-gradient(ellipse at 18% 12%, rgb(229 216 184 / 13%), transparent 44%),
-    linear-gradient(180deg, #fffef9 0%, #fcfaf2 100%);
-  color: var(--ink);
-  border: 1px solid rgb(112 95 64 / 14%);
-  border-radius: 0;
-  box-shadow: 0 -12px 38px rgb(34 28 17 / 18%), inset 0 1px 0 rgb(255 255 255 / 90%);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: 35dvh 16px max(24px, env(safe-area-inset-bottom));
   outline: none;
-  padding: 0 max(24px, calc((100vw - 964px) / 2)) 35dvh;
-  padding-left: max(64px, calc((100vw - 964px) / 2));
-  -webkit-mask-image: linear-gradient(#000, #000), radial-gradient(circle, #000 0 8px, transparent 9px);
-  -webkit-mask-size: 100% 100%, 24px 14.2857%;
-  -webkit-mask-position: 0 0, 6px 0;
-  -webkit-mask-repeat: no-repeat, repeat-y;
-  -webkit-mask-composite: xor;
-  mask-image: linear-gradient(#000, #000), radial-gradient(circle, #000 0 8px, transparent 9px);
-  mask-size: 100% 100%, 24px 14.2857%;
-  mask-position: 0 0, 6px 0;
-  mask-repeat: no-repeat, repeat-y;
-  mask-composite: exclude;
-  filter: drop-shadow(0 0 1px rgb(87 77 60 / 70%));
+  scrollbar-width: none;
+}
+
+.reader::-webkit-scrollbar {
+  display: none;
+}
+
+/* Vaul's overscroll filler would create two empty viewports after the paper. */
+.reader::after {
+  display: none;
+}
+
+.sheet {
+  --note-title-size: 13px;
+  --note-body-size: 12px;
+  --note-caption-size: 10px;
+  /* Scan: first rule at y=190, subsequent rules about 53.2px apart (1254px tall).
+     Keep text and media on this same grid, including after a drawer resize. */
+  --note-paper-height: max(100dvh, 720px);
+  --note-rule: calc(var(--note-paper-height) * 0.04242424);
+  --note-first-rule: calc(var(--note-paper-height) * 0.15151515);
+  position: relative;
+  min-height: 65dvh;
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  padding: 0 clamp(28px, 6vw, 80px) calc(var(--note-rule) * 2);
+  padding-left: clamp(40px, 7vw, 88px);
+  max-width: 1040px;
+  margin-inline: auto;
+  filter: drop-shadow(0 -6px 18px rgb(34 28 17 / 16%));
 }
 
 @media (min-width: 720px) {
+  .reader {
+    padding-inline: 32px;
+  }
+
   .sheet {
-    inset-inline: 32px;
-    bottom: 24px;
+    --note-title-size: 16px;
+    --note-body-size: 14px;
+    --note-caption-size: 11px;
   }
 }
 
-.handle {
-  flex-shrink: 0;
-  height: 0;
-  min-height: 0;
-  margin: 0;
-  background: transparent;
-  opacity: 0;
+.paperTexture {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.paperTop,
+.paperRow,
+.paperBottom {
+  background-image: url("/images/notebook-paper.png");
+  background-size: 100% var(--note-paper-height);
+  background-repeat: no-repeat;
+}
+
+.paperTop {
+  height: calc(var(--note-first-rule) + var(--note-rule));
+}
+
+.paperRow {
+  height: var(--note-rule);
+  /* Use the second ruled band, clear of the punched hole in the first band. */
+  background-position: center calc(-1 * (var(--note-first-rule) + var(--note-rule)));
+}
+
+.paperMiddle {
+  position: absolute;
+  inset: calc(var(--note-first-rule) + var(--note-rule)) 0 var(--note-rule);
   overflow: hidden;
 }
 
-.sheet .handle {
-  background: transparent;
-  opacity: 0;
+.paperBottom {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--note-rule);
+  background-position: center bottom;
 }
 
 .header {
@@ -64,44 +102,65 @@
   z-index: 1;
   display: flex;
   align-items: flex-start;
-  padding-top: 24px;
-  margin-bottom: clamp(16px, 2.5dvh, 24px);
+  padding-top: calc(var(--note-first-rule) - var(--note-rule));
+  margin-bottom: 0;
   flex-shrink: 0;
 }
 
 .header time {
-  font-size: 13px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  display: block;
+  line-height: var(--note-rule);
+  font-family: var(--font-note-body), "Batang", serif;
+  font-size: var(--note-title-size);
+  font-weight: 400;
+  color: #3a342e;
 }
 
 .title {
   max-width: 28ch;
-  margin: 0 0 6px;
-  font-size: clamp(19px, 2.2vw, 22px);
-  font-weight: 550;
-  letter-spacing: -0.025em;
-  line-height: 1.35;
+  margin: 0;
+  font-family: var(--font-note-body), "Batang", serif;
+  font-size: var(--note-title-size);
+  font-weight: 700;
+  color: #292622;
+  letter-spacing: 0;
+  line-height: var(--note-rule);
 }
 
 .body {
+  container-type: inline-size;
+  font-size: var(--note-body-size);
+  font-family: var(--font-note-body), "Batang", serif;
+  color: #292622;
   position: relative;
   z-index: 1;
-  overflow: hidden;
-  overscroll-behavior: contain;
-  flex: 1;
-  min-height: 0;
-  padding: 0 2px calc(28px + env(safe-area-inset-bottom));
+  /* The entire paper scrolls in .reader; the body has no scrollport. */
+  padding: calc(var(--note-rule) / 2) 2px calc(28px + env(safe-area-inset-bottom));
+}
+
+.body::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--note-rule) / 2);
+  left: 50%;
+  width: clamp(88px, 26cqi, 128px);
+  height: 40px;
+  background: url("/images/masking-tape.png") center / contain no-repeat;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  pointer-events: none;
 }
 
 .body :global(.artwork iframe) {
-  height: min(360px, 45dvh);
+  height: round(down, min(360px, 45dvh), var(--note-rule));
 }
 
 .body :global(.work-recording-image) {
   display: block;
-  max-height: min(360px, 45dvh);
+  height: round(down, min(360px, 45dvh, 75cqi), var(--note-rule));
+  max-height: none;
   object-fit: contain;
+  background: transparent;
 }
 
 .body :global(.work-recording) {
@@ -110,40 +169,70 @@
 }
 
 .body :global(.work-recording figcaption) {
-  padding: 10px 0 0;
+  padding: calc(var(--note-rule) / 2) 0 0;
+  line-height: var(--note-rule);
+}
+
+.body :global(.work-live-link) {
+  padding: calc(var(--note-rule) / 2) 0 0;
+  line-height: var(--note-rule);
 }
 
 .body :global(.work-recording a) {
-  font-size: 14px;
+  font-family: var(--font-note-body), "Batang", serif;
+  font-size: var(--note-caption-size);
+  line-height: var(--note-rule);
+  gap: 4px;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.body :global(.work-recording a:hover),
+.body :global(.work-recording a:focus-visible) {
+  text-decoration: underline;
+}
+
+.body :global(.work-recording a svg) {
+  width: 1em;
+  height: 1em;
 }
 
 .body :global(.post-story) {
   max-width: 62ch;
-  margin: clamp(24px, 3dvh, 36px) auto 28px;
+  margin: var(--note-rule) auto;
 }
 
 .body :global(.post-story > h2) {
-  margin: 0 0 12px;
-  font-size: 17px;
-  line-height: 1.45;
+  margin: 0 0 var(--note-rule);
+  font-size: var(--note-body-size);
+  line-height: var(--note-rule);
 }
 
 .body :global(.prose) {
   max-width: 62ch;
-  font-size: clamp(15px, 1.15vw, 16px);
-  line-height: 1.8;
+  font-size: var(--note-body-size);
+  line-height: var(--note-rule);
 }
 
 .body :global(.prose p) {
-  margin: 0 0 16px;
+  margin: 0 0 var(--note-rule);
 }
 
-.sheet[data-expanded="true"] {
-  padding-bottom: 0;
+.body :global(.prose h1),
+.body :global(.prose h2),
+.body :global(.prose h3) {
+  margin: var(--note-rule) 0;
+  line-height: var(--note-rule);
+}
+
+.body :global(.prose ul),
+.body :global(.prose ol),
+.body :global(.prose blockquote) {
+  margin-block: var(--note-rule);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sheet, .overlay {
+  .reader, .sheet, .overlay {
     animation: none !important;
     transition: none !important;
   }

@@ -89,6 +89,38 @@ pnpm build
 
 GIF가 없는 작품은 기존 실시간 미리보기를 사용합니다. 개발 중 원본 링크를 확인하려면 루트 `pnpm build:interactions`로 정적 작품 파일을 준비하세요.
 
+### GIF 생성
+
+새 작품의 미리보기는 루트에서 Playwright Chromium을 한 번 설치한 뒤 생성합니다.
+
+```sh
+pnpm exec playwright install chromium
+pnpm capture:gif -- http://localhost:3000/works/my-work \
+  --out apps/web/public/works/my-work
+```
+
+기본 크기는 720×540, 12 FPS, 4초입니다. 생성 폴더에 `preview.gif`와 `poster.webp`가 저장됩니다. `--width`, `--height`, `--fps`, `--duration`, `--settle` 옵션으로 캡처를 조정할 수 있습니다. 출력 폴더를 생략하면 URL 마지막 경로 이름으로 `apps/web/public/works/<slug>`를 사용합니다.
+
+클릭·호버·키 입력·스크롤을 GIF에 담으려면 아래처럼 시나리오 JSON을 지정합니다. `at`은 녹화 시작 후 경과 시간(ms)이며, `selector` 대신 `x`, `y` 좌표를 쓸 수도 있습니다.
+
+```json
+{
+  "steps": [
+    { "at": 400, "type": "hover", "selector": ".card" },
+    { "at": 1400, "type": "click", "selector": "button" },
+    { "at": 2400, "type": "scroll", "x": 0, "y": 400 }
+  ]
+}
+```
+
+```sh
+pnpm capture:gif -- http://localhost:3000/works/my-work \
+  --out apps/web/public/works/my-work \
+  --scenario apps/web/works/my-work/preview-scenario.json
+```
+
+`pnpm capture:gif -- --help`에서 전체 옵션과 지원 동작을 볼 수 있습니다.
+
 
 ## 기존 작품의 날짜
 

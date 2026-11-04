@@ -5,6 +5,7 @@
     "build": "pnpm gen:registry && pnpm build:interactions && turbo run build --filter=web",
     "build:interactions": "tsx packages/scripts/build-interactions.ts",
     "capture:gif": "node scripts/capture-gif.mjs",
+    "test:capture": "node --test scripts/capture-gif.test.mjs",
     "dev": "turbo run dev --concurrency=30",
     "dev:gallery": "pnpm dev:web",
     "lint": "turbo run lint",

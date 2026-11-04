@@ -118,7 +118,7 @@ async function loadScenario(file) {
 async function capture(options) {
   const steps = await loadScenario(options.scenario);
   const frameDelay = 1000 / options.fps;
-  const frameCount = Math.max(1, Math.round(options.duration * options.fps));
+  const duration = options.duration * 1000;
   const outputDir = path.resolve(options.out);
   await mkdir(outputDir, { recursive: true });
 
@@ -132,16 +132,39 @@ async function capture(options) {
     await page.goto(options.url, { waitUntil: "domcontentloaded", timeout: 60_000 });
     await page.waitForTimeout(options.settle);
 
-    const encoder = GIFEncoder();
-    let poster;
+    // Collect PNGs before encoding: quantization must not slow down the page timeline.
+    const frames = [];
+    const startedAt = performance.now();
     let nextStep = 0;
-    for (let frame = 0; frame < frameCount; frame += 1) {
-      const at = frame * frameDelay;
-      while (nextStep < steps.length && steps[nextStep].at <= at) {
+    let nextFrameAt = 0;
+    while (performance.now() - startedAt < duration) {
+      while (nextStep < steps.length && steps[nextStep].at < duration &&
+        steps[nextStep].at <= performance.now() - startedAt) {
         await runAction(page, steps[nextStep]);
         nextStep += 1;
       }
-      const screenshot = await page.screenshot({ type: "png" });
+      const at = performance.now() - startedAt;
+      if (at >= duration) break;
+      if (at >= nextFrameAt) {
+        const screenshot = await page.screenshot({ type: "png" });
+        frames.push({ at: frames.length === 0 ? 0 : at, screenshot });
+        // Skip missed slots rather than replaying them and extending the recording.
+        nextFrameAt = (Math.floor((performance.now() - startedAt) / frameDelay) + 1) * frameDelay;
+      }
+      const nextAt = Math.min(nextFrameAt, steps[nextStep]?.at ?? duration, duration);
+      const wait = nextAt - (performance.now() - startedAt);
+      if (wait > 0) await page.waitForTimeout(wait);
+    }
+    if (frames.length === 0) throw new Error("No frames captured before the recording ended.");
+
+    const encoder = GIFEncoder();
+    let poster;
+    for (let frame = 0; frame < frames.length; frame += 1) {
+      const { screenshot, at } = frames[frame];
+      // GIF stores delays in 10ms units. Round boundaries, not each interval,
+      // so rounding does not shorten a 12 FPS recording by 40ms per second.
+      const end = frames[frame + 1]?.at ?? duration;
+      const delay = (Math.round(end / 10) - Math.round(at / 10)) * 10;
       const { data } = await sharp(screenshot)
         .resize(options.width, options.height, { fit: "fill" })
         .ensureAlpha()
@@ -152,17 +175,16 @@ async function capture(options) {
       const indexed = applyPalette(rgba, palette);
       encoder.writeFrame(indexed, options.width, options.height, {
         palette,
-        delay: frameDelay,
+        delay,
         repeat: 0,
         dispose: 1,
       });
-      if (frame === frameCount - 1) {
+      if (frame === frames.length - 1) {
         poster = await sharp(screenshot)
           .resize(options.width, options.height, { fit: "fill" })
           .webp({ quality: 82 })
           .toBuffer();
       }
-      if (frame < frameCount - 1) await page.waitForTimeout(frameDelay);
     }
     encoder.finish();
     await Promise.all([

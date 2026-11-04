@@ -1,14 +1,51 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
+import localFont from "next/font/local";
 import { useLanguage, Text } from "./Language";
 import { Drawer } from "vaul";
 import styles from "./WorkSheet.module.css";
 
-const PREVIEW = 0.65;
-const MAX_SNAP = 0.94;
-const SNAP_POINTS = [PREVIEW, MAX_SNAP];
+const handwriting = localFont({
+  src: "../app/fonts/KyoboHandwriting2023wsa.ttf",
+  variable: "--font-note-handwriting",
+  weight: "400",
+  display: "swap",
+  preload: false,
+});
+const myeongjo = localFont({
+  src: "../app/fonts/GowunBatang-Regular.ttf",
+  variable: "--font-note-body",
+  weight: "400",
+  display: "swap",
+  preload: false,
+});
+
+function PaperTexture() {
+  const texture = useRef<HTMLDivElement>(null);
+  const [rows, setRows] = useState(24);
+
+  useEffect(() => {
+    const element = texture.current;
+    if (!element) return;
+    const observer = new ResizeObserver(() => {
+      const row = element.querySelector<HTMLElement>("[data-paper-row]");
+      const step = row?.getBoundingClientRect().height ?? 30;
+      setRows(Math.ceil(element.clientHeight / Math.max(step, 1)) + 1);
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return <div ref={texture} className={styles.paperTexture} aria-hidden="true">
+    <div className={styles.paperTop} />
+    <div className={styles.paperMiddle}>
+      {Array.from({ length: rows }, (_, index) => <div key={index} data-paper-row className={styles.paperRow} />)}
+    </div>
+    <div className={styles.paperBottom} />
+  </div>;
+}
 
 export function WorkSheet({ slug, date, title, englishTitle, unpublished, className, children }: {
   slug: string;
@@ -23,21 +60,15 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
   const displayTitle = locale === "en" ? englishTitle ?? title : title;
   const href = `/works/${slug}/`;
   const [open, setOpen] = useState(false);
-  const [snap, setSnap] = useState<number | string | null>(PREVIEW);
+
 
 
 
   return (
     <Drawer.Root
       open={open}
-      onOpenChange={(next) => {
-        setOpen(next);
-        setSnap(PREVIEW);
-      }}
-      snapPoints={SNAP_POINTS}
-      activeSnapPoint={snap}
-      setActiveSnapPoint={setSnap}
-      fadeFromIndex={0}
+      onOpenChange={setOpen}
+      handleOnly
       autoFocus
     >
       <Drawer.Trigger asChild>
@@ -50,7 +81,6 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
               return;
             }
             event.preventDefault();
-            setSnap(PREVIEW);
             setOpen(true);
           }}
           aria-label={`${date.slice(2)} · ${displayTitle}${unpublished ? (locale === "ko" ? " · 미공개" : " · Unpublished") : ""}`}
@@ -61,16 +91,15 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
       <Drawer.Portal>
         <Drawer.Overlay className={styles.overlay} />
         <Drawer.Content
-          className={styles.sheet}
-          data-expanded={snap === MAX_SNAP}
+          className={styles.reader}
           aria-describedby={undefined}
-          onWheel={(event) => {
-            if (!window.matchMedia("(pointer: fine)").matches) return;
-            event.preventDefault();
-            setSnap(MAX_SNAP);
+          data-vaul-no-drag
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setOpen(false);
           }}
         >
-          <Drawer.Handle className={styles.handle} preventCycle aria-label={locale === "ko" ? "바텀시트 높이 조절" : "Resize preview panel"} />
+          <div className={`${styles.sheet} ${handwriting.variable} ${myeongjo.variable}`}>
+          <PaperTexture />
           <header className={styles.header}>
             <div>
               <Drawer.Title className={styles.title}>{displayTitle}</Drawer.Title>
@@ -78,8 +107,9 @@ export function WorkSheet({ slug, date, title, englishTitle, unpublished, classN
               {unpublished && <span className="draft-label"><Text ko="미공개 미리보기" en="Unpublished preview" /></span>}
             </div>
           </header>
-          <div className={styles.body} data-vaul-no-drag>
+          <div className={styles.body}>
             {children}
+          </div>
           </div>
         </Drawer.Content>
       </Drawer.Portal>
